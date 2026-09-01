@@ -456,8 +456,15 @@ document
                 指定下载文件名
             */
 
-            a.download =
-                fileName;
+            a.setAttribute(
+                "download",
+                fileName
+            );
+
+            a.setAttribute(
+                "target",
+                "_self"
+            );
 
 
             /*
