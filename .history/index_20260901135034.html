@@ -418,15 +418,29 @@ document
 
             e.stopPropagation();
 
+
             /*
                 关闭右键菜单
             */
 
-            menu.style.display = "none";
+            menu.style.display =
+                "none";
 
 
             /*
-                作品集原图地址
+                直接打开下载地址。
+
+                Cloudflare 的 _headers
+                会强制：
+
+                Content-Type:
+                application/octet-stream
+
+                Content-Disposition:
+                attachment
+
+                因此浏览器会直接进入下载，
+                不会打开 JPG。
             */
 
             const downloadUrl =
@@ -434,70 +448,16 @@ document
 
 
             /*
-                下载后的文件名
+                使用 window.location
+                直接交给浏览器处理下载。
             */
 
-            const fileName =
-                "陈宇翔 - 作品集 [ 2026 ] 资深视觉设计丨AIGC丨品牌.jpg";
-
-
-            /*
-                创建隐藏下载链接
-            */
-
-            const a =
-                document.createElement("a");
-
-
-            a.href =
+            window.location.href =
                 downloadUrl;
-
-
-            /*
-                指定下载文件名
-            */
-
-            a.download =
-                fileName;
-
-
-            /*
-                隐藏链接
-            */
-
-            a.style.display =
-                "none";
-
-
-            /*
-                加入页面
-            */
-
-            document.body.appendChild(a);
-
-
-            /*
-                执行下载
-            */
-
-            a.click();
-
-
-            /*
-                清理
-            */
-
-            setTimeout(
-                function(){
-
-                    document.body.removeChild(a);
-
-                },
-                1000
-            );
 
         }
     );
+
 
 
 /* =========================================================
